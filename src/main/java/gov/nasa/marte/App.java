@@ -1,13 +1,9 @@
 package gov.nasa.marte;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+import gov.nasa.marte.model.*;
+
+public class App {
+
+    public static void main( String[] args ) {
     }
 }
