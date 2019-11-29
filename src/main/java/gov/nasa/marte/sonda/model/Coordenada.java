@@ -1,9 +1,9 @@
-package gov.nasa.marte.model;
+package gov.nasa.marte.sonda.model;
 
 public class Coordenada {
 
-    private int x;
-    private int y;
+    protected int x;
+    protected int y;
 
     public Coordenada(int x, int y) {
         this.x = x;
@@ -26,11 +26,11 @@ public class Coordenada {
         this.y = y;
     }
 
-    public void incrementX(int val) {
+    public void addX(int val) {
         this.x += val; 
     }
 
-    public void incrementY(int val) {
+    public void addY(int val) {
         this.y += val; 
     }
 
@@ -40,8 +40,11 @@ public class Coordenada {
             return false;
         } else if (obj == this) {
             return true;
-        } else if (obj instanceof Coordenada 
-                    && ((Coordenada)obj).getX() == this.x && ((Coordenada)obj).getY() == this.y) {
+        } else if (!(obj instanceof Coordenada)) {
+            return false;
+        }
+        Coordenada that = (Coordenada)obj;
+        if (that.getX() == this.x && that.getY() == this.y) {
             return true;
         }
         return false;
@@ -49,7 +52,6 @@ public class Coordenada {
 
     @Override
     public String toString() {
-        return x + " " + y;
-        //return "{x: " + x + ", y: " + y + "}";
+        return "{x: " + x + ", y: " + y + "}";
     }
 }
