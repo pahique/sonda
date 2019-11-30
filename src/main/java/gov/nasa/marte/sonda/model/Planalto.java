@@ -37,14 +37,16 @@ public class Planalto {
             return false;
         }
         Planalto that = (Planalto)obj;
-        boolean limiteEquals = (this.limiteSuperior == null && that.getLimiteSuperior() == null) 
+        boolean limiteInferiorEquals = (this.limiteInferior == null && that.getLimiteInferior() == null) 
+                || (this.limiteInferior != null && this.limiteInferior.equals(that.getLimiteInferior()));
+        boolean limiteSuperiorEquals = (this.limiteSuperior == null && that.getLimiteSuperior() == null) 
                              || (this.limiteSuperior != null && this.limiteSuperior.equals(that.getLimiteSuperior()));
-        if (limiteEquals) {
+        if (limiteInferiorEquals && limiteSuperiorEquals) {
             return true;
         }
         return false;
     }
-
+    
     public boolean isCoordenadaValida(Coordenada coordenada) {
         boolean result = false;
         if (coordenada != null) {
@@ -56,5 +58,5 @@ public class Planalto {
             }
         }
         return result;
-    } 
+    }     
 }

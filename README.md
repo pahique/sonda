@@ -1,6 +1,14 @@
 # Projeto Sonda da NASA em Marte
 
 Projeto simples de API Rest, feito em Java utilizando SpringBoot.
+Classes principais:
+
+* SondaController: Porta de entrada da aplicação, via API Rest.
+
+* SondaService: Concentra a logica de negócio e mantem o estado entre cada chamada à API.
+
+* Pacote model: Entidades do sistema, algumas com algumas funcionalidades simples que independem de fatores externos.
+
 
 ## Instruções para execução
 
@@ -18,7 +26,7 @@ Projeto simples de API Rest, feito em Java utilizando SpringBoot.
 
 ### Adicionar sonda:
 
-  `curl -X POST -H 'Content-Type: application/json' -d '{"posicao": {"x": 2,"y":4}, "orientacao": "NORTE"}' http://localhost:8080/sonda`
+  `curl -X POST -H 'Content-Type: application/json' -d '{"posicao": {"x": 2,"y":4}, "orientacao": "N"}' http://localhost:8080/sonda`
 
 ### Obter dados da sonda:
 
@@ -27,7 +35,7 @@ Projeto simples de API Rest, feito em Java utilizando SpringBoot.
 
 ### Movimentar sonda:
 
-  `curl -X PUT -H 'Content-Type: application/json' -d '["GIRAR_ESQUERDA", "GIRAR_ESQUERDA", "MOVER_FRENTE", "MOVER_FRENTE", "GIRAR_DIREITA"]' http://localhost:8080/sonda/1`
+  `curl -X PUT -H 'Content-Type: application/json' -d '["L", "L", "M", "M", "R"]' http://localhost:8080/sonda/1`
 
 
 

@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import gov.nasa.marte.sonda.controller.PlanaltoNaoEncontradoException;
-import gov.nasa.marte.sonda.controller.PosicaoInvalidaException;
 import gov.nasa.marte.sonda.model.Coordenada;
 import gov.nasa.marte.sonda.model.MovimentoEnum;
 import gov.nasa.marte.sonda.model.OrientacaoEnum;
@@ -26,18 +24,21 @@ public class SondaService {
 	}
 
 	public Planalto getPlanalto() {
+		if (planalto == null) {
+			throw new PlanaltoNaoEspecificadoException("O planalto ainda não foi criado");
+		}
 		return planalto;
 	}
 	
     public synchronized Sonda adicionarSonda(Coordenada posicao, OrientacaoEnum orientacao) 
-    			throws PlanaltoNaoEncontradoException, PosicaoInvalidaException {
+    			throws PlanaltoNaoEspecificadoException, PosicaoInvalidaException {
         if (planalto == null) {
-        	throw new PlanaltoNaoEncontradoException();
+        	throw new PlanaltoNaoEspecificadoException("É necessário criar o planalto antes de adicionar uma sonda");
         }  else if (!planalto.isCoordenadaValida(posicao)) {
-    		throw new PosicaoInvalidaException();
+    		throw new PosicaoInvalidaException("Posição da sonda " + posicao + " está fora dos limites do planalto " + planalto);
         } else {
         	Integer id = listaSondas.size() + 1;
-        	Sonda sonda = new Sonda(id, planalto, posicao, orientacao);
+        	Sonda sonda = new Sonda(id, posicao, orientacao);
         	listaSondas.add(sonda);
             return sonda;
         }
@@ -51,6 +52,9 @@ public class SondaService {
     			break;
     		}
     	}
+    	if (result == null) {
+    		throw new SondaNaoEncontradaException("Não foi encontrada nenhuma sonda com o id " + id);
+    	}
     	return result;
     }
     
@@ -61,9 +65,16 @@ public class SondaService {
     		if (listaMovimentos != null) {
 				for (MovimentoEnum movimento : listaMovimentos) {
 					switch(movimento) {
-						case GIRAR_ESQUERDA: sonda.girarEsquerda(); break;
-						case GIRAR_DIREITA: sonda.girarDireita(); break;
-						case MOVER_FRENTE: sonda.moverFrente(); break;
+						case L: 
+							sonda.girarEsquerda(); break;
+						case R: 
+							sonda.girarDireita(); break;
+						case M: 
+							Coordenada proximaPosicao = sonda.calcularProximaPosicao();
+							if (planalto.isCoordenadaValida(proximaPosicao)) {
+								sonda.moverFrente(); 
+							}
+							break;
 					}
 				}
     		}

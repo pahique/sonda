@@ -5,11 +5,9 @@ public class Sonda {
 	protected Integer id;
     protected Coordenada posicao;
     protected OrientacaoEnum orientacao;
-    protected Planalto planalto;
 
-    public Sonda(Integer id, Planalto planalto, Coordenada posicao, OrientacaoEnum orientacao) {
+    public Sonda(Integer id, Coordenada posicao, OrientacaoEnum orientacao) {
     	this.id = id;
-        this.planalto = planalto;
         this.posicao = posicao;
         this.orientacao = orientacao;
     }
@@ -36,14 +34,6 @@ public class Sonda {
     
 	public void setOrientacao(OrientacaoEnum orientacao) {
 		this.orientacao = orientacao;
-    }
-
-    public Planalto getPlanalto() {
-        return planalto;
-    }
-
-    public void setPlanalto(Planalto planalto) {
-        this.planalto = planalto;
     }
 
     @Override
@@ -73,10 +63,10 @@ public class Sonda {
     public void girarEsquerda() {
         if (this.orientacao != null) {
             switch(this.orientacao) {
-                case NORTE : this.setOrientacao(OrientacaoEnum.OESTE); break;
-                case OESTE : this.setOrientacao(OrientacaoEnum.SUL); break;
-                case SUL : this.setOrientacao(OrientacaoEnum.LESTE); break;
-                case LESTE : this.setOrientacao(OrientacaoEnum.NORTE); break;
+                case N : this.setOrientacao(OrientacaoEnum.W); break;
+                case W : this.setOrientacao(OrientacaoEnum.S); break;
+                case S : this.setOrientacao(OrientacaoEnum.E); break;
+                case E : this.setOrientacao(OrientacaoEnum.N); break;
             }
         }
     }
@@ -84,27 +74,36 @@ public class Sonda {
     public void girarDireita() {
         if (this.orientacao != null) {
             switch(this.orientacao) {
-                case NORTE : this.setOrientacao(OrientacaoEnum.LESTE); break;
-                case LESTE : this.setOrientacao(OrientacaoEnum.SUL); break;
-                case SUL : this.setOrientacao(OrientacaoEnum.OESTE); break;
-                case OESTE : this.setOrientacao(OrientacaoEnum.NORTE); break;
+                case N : this.setOrientacao(OrientacaoEnum.E); break;
+                case E : this.setOrientacao(OrientacaoEnum.S); break;
+                case S : this.setOrientacao(OrientacaoEnum.W); break;
+                case W : this.setOrientacao(OrientacaoEnum.N); break;
             }
         }
     }
 
-    public void moverFrente() {
-        if (this.planalto != null && this.posicao != null && this.orientacao != null) {
-            Coordenada novaPosicao = new Coordenada(this.posicao.getX(), this.posicao.getY());
-            switch(this.orientacao) {
-                case NORTE : novaPosicao.addY(1); break;
-                case OESTE : novaPosicao.addX(-1); break;
-                case SUL : novaPosicao.addY(-1); break;
-                case LESTE : novaPosicao.addX(1); break;
-            }        
-            if (planalto.isCoordenadaValida(novaPosicao)) {
-                this.setPosicao(novaPosicao);
-            } 
+    public Coordenada calcularProximaPosicao() {
+    	Coordenada novaPosicao = null;
+        if (this.posicao != null && this.orientacao != null) {
+            novaPosicao = new Coordenada(this.posicao.getX(), this.posicao.getY());
+            incrementarPosicao(this.orientacao, novaPosicao);
         }
+        return novaPosicao;
     }
 
+    public void moverFrente() {
+        if (this.posicao != null && this.orientacao != null) {
+        	incrementarPosicao(this.orientacao, this.posicao);
+        }
+    }
+    
+    private void incrementarPosicao(OrientacaoEnum orientacao, Coordenada posicao) {
+        switch(orientacao) {
+        	case N : posicao.addY(1); break;
+        	case W : posicao.addX(-1); break;
+        	case S : posicao.addY(-1); break;
+        	case E : posicao.addX(1); break;
+        }        
+    }
+    
 }

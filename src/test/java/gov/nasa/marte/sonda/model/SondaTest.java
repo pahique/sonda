@@ -5,157 +5,116 @@ import org.junit.Test;
 
 public class SondaTest {
 
-    private Planalto planalto = new Planalto(new Coordenada(5, 5));
-
     @Test
-    public void girarEsquerda_inicioNorte() {
+    public void girarEsquerda_inicioN() {
         Coordenada posicao = new Coordenada(2, 4);
-        Sonda sonda = new Sonda(1, planalto, posicao, OrientacaoEnum.NORTE);
+        Sonda sonda = new Sonda(1, posicao, OrientacaoEnum.N);
         sonda.girarEsquerda();
         Assert.assertEquals(posicao, sonda.getPosicao());
-        Assert.assertEquals(OrientacaoEnum.OESTE, sonda.getOrientacao());
+        Assert.assertEquals(OrientacaoEnum.W, sonda.getOrientacao());
     }
 
     @Test
-    public void girarEsquerda_inicioOeste() {
+    public void girarEsquerda_inicioW() {
         Coordenada posicao = new Coordenada(2, 4);
-        Sonda sonda = new Sonda(1, planalto, posicao, OrientacaoEnum.OESTE);
+        Sonda sonda = new Sonda(1, posicao, OrientacaoEnum.W);
         sonda.girarEsquerda();
         Assert.assertEquals(posicao, sonda.getPosicao());
-        Assert.assertEquals(OrientacaoEnum.SUL, sonda.getOrientacao());
+        Assert.assertEquals(OrientacaoEnum.S, sonda.getOrientacao());
     }
 
     @Test
-    public void girarEsquerda_inicioSul() {
+    public void girarEsquerda_inicioS() {
         Coordenada posicao = new Coordenada(2, 4);
-        Sonda sonda = new Sonda(1, planalto, posicao, OrientacaoEnum.SUL);
+        Sonda sonda = new Sonda(1, posicao, OrientacaoEnum.S);
         sonda.girarEsquerda();
         Assert.assertEquals(posicao, sonda.getPosicao());
-        Assert.assertEquals(OrientacaoEnum.LESTE, sonda.getOrientacao());
+        Assert.assertEquals(OrientacaoEnum.E, sonda.getOrientacao());
     }
 
     @Test
-    public void girarEsquerda_inicioLeste() {
+    public void girarEsquerda_inicioE() {
         Coordenada posicao = new Coordenada(2, 4);
-        Sonda sonda = new Sonda(1, planalto, posicao, OrientacaoEnum.LESTE);
+        Sonda sonda = new Sonda(1, posicao, OrientacaoEnum.E);
         sonda.girarEsquerda();
         Assert.assertEquals(posicao, sonda.getPosicao());
-        Assert.assertEquals(OrientacaoEnum.NORTE, sonda.getOrientacao());
+        Assert.assertEquals(OrientacaoEnum.N, sonda.getOrientacao());
     }
 
     @Test
-    public void girarDireita_inicioNorte() {
+    public void girarDireita_inicioN() {
         Coordenada posicao = new Coordenada(2, 4);
-        Sonda sonda = new Sonda(1, planalto, posicao, OrientacaoEnum.NORTE);
+        Sonda sonda = new Sonda(1, posicao, OrientacaoEnum.N);
         sonda.girarDireita();
         Assert.assertEquals(posicao, sonda.getPosicao());
-        Assert.assertEquals(OrientacaoEnum.LESTE, sonda.getOrientacao());
+        Assert.assertEquals(OrientacaoEnum.E, sonda.getOrientacao());
     }
 
     @Test
-    public void girarDireita_inicioLeste() {
+    public void girarDireita_inicioE() {
         Coordenada posicao = new Coordenada(2, 4);
-        Sonda sonda = new Sonda(1, planalto, posicao, OrientacaoEnum.LESTE);
+        Sonda sonda = new Sonda(1, posicao, OrientacaoEnum.E);
         sonda.girarDireita();
         Assert.assertEquals(posicao, sonda.getPosicao());
-        Assert.assertEquals(OrientacaoEnum.SUL, sonda.getOrientacao());
+        Assert.assertEquals(OrientacaoEnum.S, sonda.getOrientacao());
     }
 
     @Test
-    public void girarDireita_inicioSul() {
+    public void girarDireita_inicioS() {
         Coordenada posicao = new Coordenada(2, 4);
-        Sonda sonda = new Sonda(1, planalto, posicao, OrientacaoEnum.SUL);
+        Sonda sonda = new Sonda(1, posicao, OrientacaoEnum.S);
         sonda.girarDireita();
         Assert.assertEquals(posicao, sonda.getPosicao());
-        Assert.assertEquals(OrientacaoEnum.OESTE, sonda.getOrientacao());
+        Assert.assertEquals(OrientacaoEnum.W, sonda.getOrientacao());
     }
 
     @Test
-    public void girarDireita_inicioOeste() {
+    public void girarDireita_inicioW() {
         Coordenada posicao = new Coordenada(2, 4);
-        Sonda sonda = new Sonda(1, planalto, posicao, OrientacaoEnum.OESTE);
+        Sonda sonda = new Sonda(1, posicao, OrientacaoEnum.W);
         sonda.girarDireita();
         Assert.assertEquals(posicao, sonda.getPosicao());
-        Assert.assertEquals(OrientacaoEnum.NORTE, sonda.getOrientacao());
+        Assert.assertEquals(OrientacaoEnum.N, sonda.getOrientacao());
     }
 
     @Test
-    public void mover_sentidoNorte() {
+    public void mover_sentidoN() {
         Coordenada posicao = new Coordenada(2, 4);
-        Sonda sonda = new Sonda(1, planalto, posicao, OrientacaoEnum.NORTE);
+        Sonda sonda = new Sonda(1, posicao, OrientacaoEnum.N);
         sonda.moverFrente();
         Coordenada novaPosicao = new Coordenada(2, 5);
         Assert.assertEquals(novaPosicao, sonda.getPosicao());
-        Assert.assertEquals(OrientacaoEnum.NORTE, sonda.getOrientacao());
+        Assert.assertEquals(OrientacaoEnum.N, sonda.getOrientacao());
     }
 
     @Test
-    public void mover_sentidoOeste() {
+    public void mover_sentidoW() {
         Coordenada posicao = new Coordenada(2, 4);
-        Sonda sonda = new Sonda(1, planalto, posicao, OrientacaoEnum.OESTE);
+        Sonda sonda = new Sonda(1, posicao, OrientacaoEnum.W);
         sonda.moverFrente();
         Coordenada novaPosicao = new Coordenada(1, 4);
         Assert.assertEquals(novaPosicao, sonda.getPosicao());
-        Assert.assertEquals(OrientacaoEnum.OESTE, sonda.getOrientacao());
+        Assert.assertEquals(OrientacaoEnum.W, sonda.getOrientacao());
     }
 
     @Test
-    public void mover_sentidoSul() {
+    public void mover_sentidoS() {
         Coordenada posicao = new Coordenada(2, 4);
-        Sonda sonda = new Sonda(1, planalto, posicao, OrientacaoEnum.SUL);
+        Sonda sonda = new Sonda(1, posicao, OrientacaoEnum.S);
         sonda.moverFrente();
         Coordenada novaPosicao = new Coordenada(2, 3);
         Assert.assertEquals(novaPosicao, sonda.getPosicao());
-        Assert.assertEquals(OrientacaoEnum.SUL, sonda.getOrientacao());
+        Assert.assertEquals(OrientacaoEnum.S, sonda.getOrientacao());
     }
 
     @Test
-    public void mover_sentidoLeste() {
+    public void mover_sentidoE() {
         Coordenada posicao = new Coordenada(2, 4);
-        Sonda sonda = new Sonda(1, planalto, posicao, OrientacaoEnum.LESTE);
+        Sonda sonda = new Sonda(1, posicao, OrientacaoEnum.E);
         sonda.moverFrente();
         Coordenada novaPosicao = new Coordenada(3, 4);
         Assert.assertEquals(novaPosicao, sonda.getPosicao());
-        Assert.assertEquals(OrientacaoEnum.LESTE, sonda.getOrientacao());
+        Assert.assertEquals(OrientacaoEnum.E, sonda.getOrientacao());
     }
 
-    @Test
-    public void mover_sentidoNorteForaDosLimites() {
-        Coordenada posicao = new Coordenada(2, 5);
-        Sonda sonda = new Sonda(1, planalto, posicao, OrientacaoEnum.NORTE);
-        sonda.moverFrente();
-        Coordenada novaPosicao = new Coordenada(2, 5);
-        Assert.assertEquals(novaPosicao, sonda.getPosicao());
-        Assert.assertEquals(OrientacaoEnum.NORTE, sonda.getOrientacao());
-    }
-
-    @Test
-    public void mover_sentidoOesteForaDosLimites() {
-        Coordenada posicao = new Coordenada(0, 4);
-        Sonda sonda = new Sonda(1, planalto, posicao, OrientacaoEnum.OESTE);
-        sonda.moverFrente();
-        Coordenada novaPosicao = new Coordenada(0, 4);
-        Assert.assertEquals(novaPosicao, sonda.getPosicao());
-        Assert.assertEquals(OrientacaoEnum.OESTE, sonda.getOrientacao());
-    }
-
-    @Test
-    public void mover_sentidoSulForaDosLimites() {
-        Coordenada posicao = new Coordenada(2, 0);
-        Sonda sonda = new Sonda(1, planalto, posicao, OrientacaoEnum.SUL);
-        sonda.moverFrente();
-        Coordenada novaPosicao = new Coordenada(2, 0);
-        Assert.assertEquals(novaPosicao, sonda.getPosicao());
-        Assert.assertEquals(OrientacaoEnum.SUL, sonda.getOrientacao());
-    }
-
-    @Test
-    public void mover_sentidoLesteForaDosLimites() {
-        Coordenada posicao = new Coordenada(5, 4);
-        Sonda sonda = new Sonda(1, planalto, posicao, OrientacaoEnum.LESTE);
-        sonda.moverFrente();
-        Coordenada novaPosicao = new Coordenada(5, 4);
-        Assert.assertEquals(novaPosicao, sonda.getPosicao());
-        Assert.assertEquals(OrientacaoEnum.LESTE, sonda.getOrientacao());
-    }
 }

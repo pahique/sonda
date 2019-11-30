@@ -1,4 +1,4 @@
-package gov.nasa.marte.sonda.controller;
+package gov.nasa.marte.sonda.service;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -7,5 +7,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class PosicaoInvalidaException extends RuntimeException {
 
 	private static final long serialVersionUID = -658972870264833589L;
+	
+	public PosicaoInvalidaException(String message) {
+		super(message);
+	}
 
 }

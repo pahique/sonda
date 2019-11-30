@@ -1,33 +1,17 @@
 package gov.nasa.marte.sonda.model;
 
 public enum MovimentoEnum {
-    GIRAR_ESQUERDA("L"),
-    GIRAR_DIREITA("R"),
-    MOVER_FRENTE("M");
+    L("Girar à esquerda"),
+    R("Girar à direita"),
+    M("Mover-se para frente");
 
-    private String codigo;
+    private String descricao;
 
-    private MovimentoEnum(String codigo) {
-        this.codigo = codigo;
+    private MovimentoEnum(String descricao) {
+        this.descricao = descricao;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getDescricao() {
+        return descricao;
     }
-
-    @Override
-    public String toString() {
-        return codigo;
-    }
-
-    public static MovimentoEnum fromCodigo(String codigo) {
-        MovimentoEnum result = null;
-        for(MovimentoEnum value : values()) {
-            if(value.getCodigo().equalsIgnoreCase(codigo)) {
-                result = value;
-            }
-        }        
-        return result;
-    }
-    
 }
