@@ -2,20 +2,25 @@ package gov.nasa.marte.sonda.model;
 
 public class Sonda {
 
+	protected Integer id;
     protected Coordenada posicao;
     protected OrientacaoEnum orientacao;
     protected Planalto planalto;
 
-    public Sonda(Planalto planalto, Coordenada posicao, OrientacaoEnum orientacao) {
+    public Sonda(Integer id, Planalto planalto, Coordenada posicao, OrientacaoEnum orientacao) {
+    	this.id = id;
         this.planalto = planalto;
         this.posicao = posicao;
         this.orientacao = orientacao;
     }
 
-    public Sonda(Coordenada posicao, OrientacaoEnum orientacao) {
-        this.posicao = posicao;
-        this.orientacao = orientacao;
-    }
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
     public Coordenada getPosicao() {
 		return posicao;
@@ -56,9 +61,10 @@ public class Sonda {
             return false;
         }
         Sonda that = (Sonda)obj;
+        boolean idEquals = (this.id == null && that.getId() == null) || (this.id != null && this.id.equals(that.getId()));
         boolean posicaoEquals = (this.posicao == null && that.getPosicao() == null) || (this.posicao != null && this.posicao.equals(that.getPosicao()));
         boolean orientacaoEquals = (this.orientacao == null && that.getOrientacao() == null) || (this.orientacao != null && this.orientacao.equals(that.getOrientacao()));
-        if (posicaoEquals && orientacaoEquals) {
+        if (idEquals && posicaoEquals && orientacaoEquals) {
             return true;
         }
         return false;
@@ -87,7 +93,7 @@ public class Sonda {
     }
 
     public void moverFrente() {
-        if (this.posicao != null && this.orientacao != null) {
+        if (this.planalto != null && this.posicao != null && this.orientacao != null) {
             Coordenada novaPosicao = new Coordenada(this.posicao.getX(), this.posicao.getY());
             switch(this.orientacao) {
                 case NORTE : novaPosicao.addY(1); break;
@@ -95,7 +101,7 @@ public class Sonda {
                 case SUL : novaPosicao.addY(-1); break;
                 case LESTE : novaPosicao.addX(1); break;
             }        
-            if (planalto != null && planalto.isCoordenadaValida(novaPosicao)) {
+            if (planalto.isCoordenadaValida(novaPosicao)) {
                 this.setPosicao(novaPosicao);
             } 
         }

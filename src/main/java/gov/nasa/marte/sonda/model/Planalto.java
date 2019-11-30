@@ -1,19 +1,17 @@
 package gov.nasa.marte.sonda.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Planalto {
 
     protected Coordenada limiteInferior; 
     protected Coordenada limiteSuperior;
 
-    protected List<Sonda> sondas = new ArrayList<Sonda>();
-    
-
     public Planalto(Coordenada limiteSuperior) {
         this.limiteInferior = new Coordenada(0, 0);
         this.limiteSuperior = limiteSuperior;
+    }
+
+    public Coordenada getLimiteInferior() {
+        return limiteInferior;
     }
 
     public Coordenada getLimiteSuperior() {
@@ -24,16 +22,9 @@ public class Planalto {
         this.limiteSuperior = limiteSuperior;
     }
 
-    public void adicionarSonda(Sonda sonda) {
-        if (isCoordenadaValida(sonda.getPosicao())) {
-            sonda.setPlanalto(this);
-            sondas.add(sonda);
-        }
-    }
-
     @Override
     public String toString() {
-        return "{limiteSuperior: " + limiteSuperior + "}";
+        return "{limiteInferior: " + limiteInferior + ", limiteSuperior: " + limiteSuperior + "}";
     }
 
     @Override
