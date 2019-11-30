@@ -3,13 +3,12 @@ package gov.nasa.marte.sonda.controller;
 import gov.nasa.marte.sonda.model.Coordenada;
 import gov.nasa.marte.sonda.model.OrientacaoEnum;
 
-public class ParametrosSonda {
+public class ParametrosSondaTO {
 
 	protected Coordenada posicao;
 	protected OrientacaoEnum orientacao;
 	
-	public ParametrosSonda() {
-		
+	public ParametrosSondaTO() {
 	}
 	
 	public Coordenada getPosicao() {

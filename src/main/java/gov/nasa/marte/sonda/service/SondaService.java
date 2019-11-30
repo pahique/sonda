@@ -15,7 +15,8 @@ import gov.nasa.marte.sonda.model.Sonda;
 public class SondaService {
 
 	protected Planalto planalto;
-	List<Sonda> listaSondas = new ArrayList<Sonda>();
+	protected List<Sonda> listaSondas = new ArrayList<Sonda>();
+	protected int idSondaAtual = 1;
 	
 	
 	public Planalto criarPlanalto(Coordenada limiteSuperior) {
@@ -30,6 +31,10 @@ public class SondaService {
 		return planalto;
 	}
 	
+	public List<Sonda> getListaSondas() {
+		return listaSondas;
+	}
+	
     public synchronized Sonda adicionarSonda(Coordenada posicao, OrientacaoEnum orientacao) 
     			throws PlanaltoNaoEspecificadoException, PosicaoInvalidaException {
         if (planalto == null) {
@@ -37,7 +42,7 @@ public class SondaService {
         }  else if (!planalto.isCoordenadaValida(posicao)) {
     		throw new PosicaoInvalidaException("Posição da sonda " + posicao + " está fora dos limites do planalto " + planalto);
         } else {
-        	Integer id = listaSondas.size() + 1;
+        	Integer id = idSondaAtual++;
         	Sonda sonda = new Sonda(id, posicao, orientacao);
         	listaSondas.add(sonda);
             return sonda;

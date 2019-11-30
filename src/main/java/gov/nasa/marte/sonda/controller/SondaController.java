@@ -3,11 +3,13 @@ package gov.nasa.marte.sonda.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import gov.nasa.marte.sonda.model.Coordenada;
@@ -22,28 +24,35 @@ public class SondaController {
 	@Autowired
 	SondaService sondaService;
 	
-	@PostMapping("/planalto")
-	Planalto novoPlanalto(@RequestBody Coordenada limiteSuperior) {
+	@PostMapping("/planaltos")
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public Planalto criarPlanalto(@RequestBody Coordenada limiteSuperior) {
 		return sondaService.criarPlanalto(limiteSuperior);
 	}
 	
-	@GetMapping("/planalto")
-	Planalto getPlanalto() {
+	@GetMapping("/planaltos")
+	public Planalto getPlanalto() {
 		return sondaService.getPlanalto();
 	}
 	  
-	@PostMapping("/sonda")
-	Sonda novaSonda(@RequestBody ParametrosSonda params) {
+	@PostMapping("/sondas")
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public Sonda adicionarSonda(@RequestBody ParametrosSondaTO params) {
 		return sondaService.adicionarSonda(params.getPosicao(), params.getOrientacao());
 	}
 
-	@GetMapping("/sonda/{id}")
-	Sonda getSonda(@PathVariable Integer id) {
+	@GetMapping("/sondas")
+	public List<Sonda> getSondas() {
+		return sondaService.getListaSondas();
+	}
+
+	@GetMapping("/sondas/{id}")
+	public Sonda getSonda(@PathVariable Integer id) {
 		return sondaService.getSonda(id);
 	}
 	
-	@PutMapping("/sonda/{id}")
-	Sonda movimentarSonda(@PathVariable Integer id, @RequestBody List<MovimentoEnum> listaMovimentos)  {
+	@PutMapping("/sondas/{id}")
+	public Sonda movimentarSonda(@PathVariable Integer id, @RequestBody List<MovimentoEnum> listaMovimentos)  {
 		return sondaService.movimentarSonda(id, listaMovimentos);
 	}
 	  

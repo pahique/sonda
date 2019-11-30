@@ -1,17 +1,27 @@
 package gov.nasa.marte.sonda.model;
 
+import java.util.Objects;
+
 public class Planalto {
 
     protected Coordenada limiteInferior; 
     protected Coordenada limiteSuperior;
 
     public Planalto(Coordenada limiteSuperior) {
-        this.limiteInferior = new Coordenada(0, 0);
+        this(new Coordenada(0, 0), limiteSuperior);
+    }
+
+    public Planalto(Coordenada limiteInferior, Coordenada limiteSuperior) {
+        this.limiteInferior = limiteInferior;
         this.limiteSuperior = limiteSuperior;
     }
 
     public Coordenada getLimiteInferior() {
         return limiteInferior;
+    }
+
+    public void setLimiteInferior(Coordenada limiteInferior) {
+        this.limiteInferior = limiteInferior;
     }
 
     public Coordenada getLimiteSuperior() {
@@ -47,6 +57,11 @@ public class Planalto {
         return false;
     }
     
+    @Override
+    public int hashCode() {
+        return Objects.hash(limiteInferior, limiteSuperior);
+    }
+
     public boolean isCoordenadaValida(Coordenada coordenada) {
         boolean result = false;
         if (coordenada != null) {

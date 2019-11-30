@@ -1,5 +1,7 @@
 package gov.nasa.marte.sonda.model;
 
+import java.util.Objects;
+
 public class Coordenada {
 
     protected int x;
@@ -48,6 +50,11 @@ public class Coordenada {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 
     @Override

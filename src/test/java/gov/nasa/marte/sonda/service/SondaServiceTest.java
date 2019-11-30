@@ -14,7 +14,7 @@ import gov.nasa.marte.sonda.model.Sonda;
 
 public class SondaServiceTest {
 	
-	//TODO: verificar se compensa injetar o Service ou deixar assim
+	//TODO: injetar o Service ou deixar assim
 	
 	@Test
 	public void criarPlanalto() {
@@ -55,6 +55,22 @@ public class SondaServiceTest {
 		Assert.assertEquals(new Integer(1), sonda.getId());
 		Assert.assertEquals(new Coordenada(2, 2), sonda.getPosicao());
 		Assert.assertEquals(OrientacaoEnum.S, sonda.getOrientacao());
+    }
+    
+	@Test
+    public void getSondas() {
+		SondaService service = new SondaService();
+		service.planalto = new Planalto(new Coordenada(5, 5));
+		service.listaSondas.add(new Sonda(1, new Coordenada(2, 2), OrientacaoEnum.S));
+		service.listaSondas.add(new Sonda(2, new Coordenada(2, 4), OrientacaoEnum.W));
+		List<Sonda> sondas = service.getListaSondas();
+		Assert.assertEquals(2, sondas.size());
+		Assert.assertEquals(new Integer(1), sondas.get(0).getId());
+		Assert.assertEquals(new Coordenada(2, 2), sondas.get(0).getPosicao());
+		Assert.assertEquals(OrientacaoEnum.S, sondas.get(0).getOrientacao());
+		Assert.assertEquals(new Integer(2), sondas.get(1).getId());
+		Assert.assertEquals(new Coordenada(2, 4), sondas.get(1).getPosicao());
+		Assert.assertEquals(OrientacaoEnum.W, sondas.get(1).getOrientacao());
     }
     
 	@Test

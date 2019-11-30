@@ -1,5 +1,7 @@
 package gov.nasa.marte.sonda.model;
 
+import java.util.Objects;
+
 public class Sonda {
 
 	protected Integer id;
@@ -38,7 +40,7 @@ public class Sonda {
 
     @Override
     public String toString() {
-        return "{posicao: " + posicao + ", orientacao: " + orientacao + "}";
+        return "{id: " + id + ", posicao: " + posicao + ", orientacao: " + orientacao + "}";
     }
     
     @Override
@@ -58,6 +60,11 @@ public class Sonda {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, posicao, orientacao);
     }
 
     public void girarEsquerda() {

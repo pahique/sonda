@@ -18,24 +18,27 @@ Classes principais:
 
 ### Configurar planalto:
 
-  `curl -X POST -H 'Content-Type: application/json' -d '{"x": 5,"y":5}' http://localhost:8080/planalto`
+  `curl -X POST -H 'Content-Type: application/json' -d '{"x": 5,"y":5}' http://localhost:8080/planaltos`
 
 ### Obter dados do planalto:
 
-  `curl -X GET http://localhost:8080/planalto`
+  `curl -X GET http://localhost:8080/planaltos`
 
 ### Adicionar sonda:
 
-  `curl -X POST -H 'Content-Type: application/json' -d '{"posicao": {"x": 2,"y":4}, "orientacao": "N"}' http://localhost:8080/sonda`
+  `curl -X POST -H 'Content-Type: application/json' -d '{"posicao": {"x": 2,"y":4}, "orientacao": "N"}' http://localhost:8080/sondas`
 
 ### Obter dados da sonda:
 
-  `curl -X GET http://localhost:8080/sonda/1`
+  `curl -X GET http://localhost:8080/sondas/1`
 
+### Obter lista de sondas:
+
+  `curl -X GET http://localhost:8080/sondas`
 
 ### Movimentar sonda:
 
-  `curl -X PUT -H 'Content-Type: application/json' -d '["L", "L", "M", "M", "R"]' http://localhost:8080/sonda/1`
+  `curl -X PUT -H 'Content-Type: application/json' -d '["L", "L", "M", "M", "R"]' http://localhost:8080/sondas/1`
 
 
 
