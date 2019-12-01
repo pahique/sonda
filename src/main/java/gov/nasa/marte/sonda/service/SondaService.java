@@ -72,6 +72,14 @@ public class SondaService {
     	return result;
     }
     
+    /**
+     * Movimenta a sonda dentro do planalto. A sonda nunca ultrapassa os limites do planalto, caso algum 
+     * movimento leve a isso ele será ignorado e a sonda permanecerá na posição corrente. Os movimentos
+     * seguintes serão executados normalmente.
+     * @param idSonda ID da sonda que será movimentada
+     * @param listaMovimentos Lista de movimentos a serem executados
+     * @return Sonda com sua posição e orientação atualizados após a execução dos movimentos
+     */
     public Sonda movimentarSonda(Integer idSonda, List<MovimentoEnum> listaMovimentos) {
 		LOGGER.info("movimentarSonda() - idSonda: " + idSonda + ", listaMovimentos: " + listaMovimentos);
     	Sonda sonda = null;
