@@ -23,4 +23,9 @@ public class ParametrosSondaTO {
 	public void setOrientacao(OrientacaoEnum orientacao) {
 		this.orientacao = orientacao;
 	}
+	
+	@Override
+	public String toString() {
+		return "{posicao: " + posicao + ", orientacao: " + orientacao + "}";
+	}
 }
