@@ -7,7 +7,7 @@ Classes principais:
 
 * SondaService: Concentra a logica de negócio e mantem o estado entre cada chamada à API.
 
-* Pacote model: Entidades do sistema, algumas com algumas funcionalidades simples que independem de fatores externos.
+* Pacote model: Entidades do sistema.
 
 
 ## Instruções para execução
