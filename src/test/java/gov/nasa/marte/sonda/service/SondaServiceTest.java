@@ -13,7 +13,7 @@ import gov.nasa.marte.sonda.model.Planalto;
 import gov.nasa.marte.sonda.model.Sonda;
 
 public class SondaServiceTest {
-		
+			
 	@Test
 	public void criarPlanalto() {
 		SondaService service = new SondaService();
@@ -46,6 +46,12 @@ public class SondaServiceTest {
 		Assert.assertEquals(service.planalto.getLimiteSuperior(), planalto.getLimiteSuperior());
 	}
 	
+	@Test(expected = PlanaltoNaoEspecificadoException.class)
+	public void getPlanalto_naoEspecificado() {
+		SondaService service = new SondaService();
+		service.getPlanalto();
+	}
+
 	@Test
     public void adicionarSonda() {
 		SondaService service = new SondaService();
@@ -58,6 +64,19 @@ public class SondaServiceTest {
 		Assert.assertEquals(OrientacaoEnum.W, service.listaSondas.get(0).getOrientacao());
     }
 
+	@Test(expected = PlanaltoNaoEspecificadoException.class)
+    public void adicionarSonda_planaltoNaoEspecificado() {
+		SondaService service = new SondaService();
+		service.adicionarSonda(new Coordenada(3, 4), OrientacaoEnum.W);
+    }
+
+	@Test(expected = PosicaoInvalidaException.class)
+    public void adicionarSonda_posicaoInvalida() {
+		SondaService service = new SondaService();
+		service.planalto = new Planalto(new Coordenada(5, 5));
+		service.adicionarSonda(new Coordenada(7, 4), OrientacaoEnum.W);
+    }
+
 	@Test
     public void getSonda() {
 		SondaService service = new SondaService();
@@ -68,7 +87,15 @@ public class SondaServiceTest {
 		Assert.assertEquals(new Coordenada(2, 2), sonda.getPosicao());
 		Assert.assertEquals(OrientacaoEnum.S, sonda.getOrientacao());
     }
-    
+
+	@Test(expected = SondaNaoEncontradaException.class)
+    public void getSonda_naoEncontrada() {
+		SondaService service = new SondaService();
+		service.planalto = new Planalto(new Coordenada(5, 5));
+		service.adicionarSonda(new Coordenada(3, 4), OrientacaoEnum.W);
+		service.getSonda(2);
+    }
+
 	@Test
     public void getSondas() {
 		SondaService service = new SondaService();
