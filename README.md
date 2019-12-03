@@ -21,6 +21,15 @@ Para executar a aplicação carregando um arquivo de entrada inicial e gerando u
  `mvn spring-boot:run -Dspring-boot.run.arguments=input.txt,output.txt`
 
  
+## Endpoints
+
+ * **POST /api/planalto/**   ---> configurar planalto
+ * **GET /api/planalto/**    ---> obter dados do planalto
+ * **POST /api/sondas/**     ---> adicionar sonda ao planalto
+ * **GET /api/sondas/**      ---> obter lista de sondas
+ * **GET /api/sondas/{id}**  ---> obter dados da sonda
+ * **PUT /api/sondas/{id}**  ---> movimentar sonda
+
 
 ## Exemplo de utilização da API
 
