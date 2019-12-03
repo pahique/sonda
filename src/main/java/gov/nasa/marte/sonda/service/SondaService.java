@@ -25,6 +25,9 @@ public class SondaService {
 	
 	public Planalto criarPlanalto(Coordenada limiteSuperior) {
 		LOGGER.info("criarPlanalto() - limiteSuperior: " + limiteSuperior);
+		if (limiteSuperior == null || limiteSuperior.getX() <= 0 || limiteSuperior.getY() <= 0) {
+			throw new LimiteInvalidoException("O limite deve ser uma coordenada maior que (0, 0)");
+		}
 		planalto = new Planalto(limiteSuperior);
 		return planalto;
 	}

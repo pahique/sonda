@@ -13,9 +13,7 @@ import gov.nasa.marte.sonda.model.Planalto;
 import gov.nasa.marte.sonda.model.Sonda;
 
 public class SondaServiceTest {
-	
-	//TODO: injetar o Service ou deixar assim
-	
+		
 	@Test
 	public void criarPlanalto() {
 		SondaService service = new SondaService();
@@ -23,6 +21,20 @@ public class SondaServiceTest {
 		service.criarPlanalto(limiteSuperior);
 		Assert.assertEquals(service.planalto.getLimiteInferior(), new Coordenada(0, 0));
 		Assert.assertEquals(service.planalto.getLimiteSuperior(), limiteSuperior);
+	}
+
+	@Test(expected = LimiteInvalidoException.class)
+	public void criarPlanalto_limiteInvalidoX() {
+		SondaService service = new SondaService();
+		Coordenada limiteSuperior = new Coordenada(-5, 5);
+		service.criarPlanalto(limiteSuperior);
+	}
+
+	@Test(expected = LimiteInvalidoException.class)
+	public void criarPlanalto_limiteInvalidoY() {
+		SondaService service = new SondaService();
+		Coordenada limiteSuperior = new Coordenada(5, -1);
+		service.criarPlanalto(limiteSuperior);
 	}
 
 	@Test
