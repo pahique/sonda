@@ -12,6 +12,7 @@ import gov.nasa.marte.sonda.model.MovimentoEnum;
 import gov.nasa.marte.sonda.model.OrientacaoEnum;
 import gov.nasa.marte.sonda.model.Planalto;
 import gov.nasa.marte.sonda.model.Sonda;
+import lombok.Synchronized;
 
 @Service
 public class SondaService {
@@ -45,7 +46,8 @@ public class SondaService {
 		return listaSondas;
 	}
 	
-    public synchronized Sonda adicionarSonda(Coordenada posicao, OrientacaoEnum orientacao) 
+	@Synchronized
+    public Sonda adicionarSonda(Coordenada posicao, OrientacaoEnum orientacao) 
     			throws PlanaltoNaoEspecificadoException, PosicaoInvalidaException {
 		LOGGER.info("adicionarSonda() - posicao: " + posicao + ", orientacao: " + orientacao);
         if (planalto == null) {
